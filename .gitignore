@@ -1,0 +1,14 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Mac system files
+.DS_Store
+.AppleDouble
+.LSOverride
+**/.DS_Store
+
+# IDE directories
+.idea/
+.vscode/

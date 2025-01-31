@@ -1,0 +1,239 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "Doorbell Configuration API",
+      "description": "API specification for advanced doorbell configuration and management",
+      "version": "1.0.0",
+      "contact": {
+        "name": "Smart Doorbell Support",
+        "email": "support@smartdoorbell.example.com"
+      }
+    },
+    "servers": [
+      {
+        "url": "https://api.smartdoorbell.example.com/v1",
+        "description": "Production server"
+      },
+      {
+        "url": "https://api-staging.smartdoorbell.example.com/v1",
+        "description": "Development server"
+      }
+    ],
+    "tags": [
+      { "name": "notifications", "description": "Notification preferences and settings" },
+      { "name": "schedule", "description": "Scheduled actions and automations" },
+      { "name": "audio", "description": "Audio settings and preferences" },
+      { "name": "video", "description": "Video quality and recording settings" },
+      { "name": "motion", "description": "Motion detection configuration" }
+    ],
+    "paths": {
+      "/doorbells/{deviceId}/notifications/config": {
+        "put": {
+          "tags": ["notifications"],
+          "summary": "Configure notification settings",
+          "description": "Update notification preferences for specific events",
+          "operationId": "updateNotificationConfig",
+          "parameters": [
+            {
+              "name": "deviceId",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string", "format": "uuid" }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotificationConfig"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Notification settings updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotificationConfig"
+                  }
+                }
+              }
+            },
+            "400": { "description": "Invalid configuration" }
+          }
+        }
+      },
+      "/doorbells/{deviceId}/schedule": {
+        "post": {
+          "tags": ["schedule"],
+          "summary": "Create scheduled action",
+          "description": "Schedule automated actions for the doorbell",
+          "operationId": "createScheduledAction",
+          "parameters": [
+            {
+              "name": "deviceId",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string", "format": "uuid" }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduledAction"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Schedule created successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ScheduledAction"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/doorbells/{deviceId}/motion/zones": {
+        "put": {
+          "tags": ["motion"],
+          "summary": "Configure motion detection zones",
+          "description": "Update motion detection zone configuration",
+          "operationId": "updateMotionZones",
+          "parameters": [
+            {
+              "name": "deviceId",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string", "format": "uuid" }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MotionZoneConfig"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Motion zones updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/MotionZoneConfig"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "NotificationConfig": {
+          "type": "object",
+          "properties": {
+            "motionEvents": { "type": "boolean" },
+            "buttonPress": { "type": "boolean" },
+            "deliveries": { "type": "boolean" },
+            "quietHours": {
+              "type": "object",
+              "properties": {
+                "enabled": { "type": "boolean" },
+                "startTime": { "type": "string", "format": "time" },
+                "endTime": { "type": "string", "format": "time" }
+              }
+            },
+            "notificationMethods": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["push", "email", "sms"]
+              }
+            }
+          }
+        },
+        "ScheduledAction": {
+          "type": "object",
+          "required": ["actionType", "schedule"],
+          "properties": {
+            "actionType": {
+              "type": "string",
+              "enum": ["mute", "unmute", "record", "stopRecord"]
+            },
+            "schedule": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": ["daily", "weekly", "custom"]
+                },
+                "cronExpression": { "type": "string" },
+                "timezone": { "type": "string" }
+              }
+            },
+            "duration": {
+              "type": "integer",
+              "description": "Duration in minutes"
+            }
+          }
+        },
+        "MotionZoneConfig": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "sensitivity": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10
+            },
+            "zones": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "active": { "type": "boolean" },
+                  "points": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "x": { "type": "number" },
+                        "y": { "type": "number" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "securitySchemes": {
+        "BearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      }
+    },
+    "security": [
+      { "BearerAuth": [] }
+    ]
+  }

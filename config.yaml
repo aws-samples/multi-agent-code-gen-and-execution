@@ -1,0 +1,74 @@
+general:
+  name: "doorbell-home-network-agentic-system"      
+  description: "This agentic system shows multi-agent collaboration a home network system and a doorbell system."
+
+# This is the data directory that contains all
+# information on results, data and prompts
+dir_paths:
+  data_prefix: data ## add the prefix for all your data management/storage
+  prompts_prefix: prompt_templates
+  results_prefix: results
+  # This directory contains the agent instructions for different home products. These can be 
+  # products related to home networking devices or the doorbell management system.
+  agent_instructions_prefix: agent_instructions
+  agent_instructions:
+    doorbell_agent_instructions: doorbell_agent_instructions.txt
+    home_network_agent_instructions: home_network_agent_instructions.txt
+
+  # These are the code generation prompts that are used
+  # within the code generation process for the sub agents.
+  # These prompts are saved using the Bedrock Prompt Management feature.
+  code_gen_prompts_prefix: code_gen_prompts
+  code_gen_prompts:
+    home_network_code_generation_prompt: home_network_code_generation_prompt.txt
+    doorbell_code_generation_prompt: doorbell_code_generation_prompt.txt
+  # These api specs contain information about the APIs, paths, 
+  # their description
+  api_specs:
+    home_network_api_spec: home_network_openapi_spec.json
+    doorbell_api_spec: doorbell_openapi_spec.json
+  # This represents the bucket names that are used to sync with the 
+  # knowledge base
+  knowledge_base_info:
+    doorbell_knowledge_bucket: <your-custom-s3-bucket>
+    home_network_knowledge_bucket: <your-custom-s3-bucket>
+    model_info:
+      retriever: anthropic.claude-3-sonnet-20240229-v1:0
+      num_retrieved_results: 5
+
+# This represents the models that will be used in this agentic system
+# by various agents in this solution performing diverse actions. We 
+# aim to configure the supervisor agent with a larger, stronger model to 
+# make complex task breakdowns, decision making and delegating and comparatively
+# smaller models per sub agent to perform domain specific, micro level tasks
+model_information:
+  doorbell_sub_agent_model: anthropic.claude-3-sonnet-20240229-v1:0
+  home_network_sub_agent_model: anthropic.claude-3-sonnet-20240229-v1:0
+  supervisor_agent_model: us.amazon.nova-pro-v1:0
+  # This model is used as the embeddings model while retrieving search results from
+  # the knowledge base containing the respective API specs
+  embedding_model: amazon.titan-embed-text-v2:0
+
+# This represents the model that is used to solely generate code that the agent
+# uses in a tool call. This model is different from the FM that powers the agent
+code_generation_model_information:
+  # These parameters are used as environment variables in the lambda
+  # function to generate code using the generate_code tool that the sub
+  # agents have access to
+  code_generation_model: "us.amazon.nova-pro-v1:0"
+  temperature: '0.1'
+  top_p: '0.9'
+  max_tokens: '4096'
+  # this is the code execution time out (in seconds)
+  code_execution_timeout: '30'
+
+# Lambda function set up. This contains information on the contents required to build an push a 
+# custom container in ECR which will be used by the lambda function. This container will have 
+# required libraries pre installed so that during code execution, the libraries are not installed
+# at runtime
+lambda_docker_set_up:
+  libraries: 
+    - "requests"
+    # - <your-libraries-here>
+  platform: linux/amd64
+

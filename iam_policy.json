@@ -1,0 +1,263 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "aoss:BatchGetLifecyclePolicy",
+                "aoss:GetAccessPolicy",
+                "aoss:CreateAccessPolicy",
+                "aoss:UpdateSecurityConfig",
+                "aoss:UpdateLifecyclePolicy",
+                "aoss:UpdateSecurityPolicy",
+                "aoss:CreateLifecyclePolicy",
+                "aoss:ListAccessPolicies",
+                "aoss:ListSecurityPolicies",
+                "aoss:UpdateAccessPolicy",
+                "aoss:DeleteSecurityPolicy",
+                "aoss:UntagResource",
+                "aoss:GetSecurityPolicy",
+                "aoss:ListTagsForResource",
+                "aoss:BatchGetCollection",
+                "aoss:ListLifecyclePolicies",
+                "aoss:ListSecurityConfigs",
+                "aoss:DeleteLifecyclePolicy",
+                "aoss:CreateSecurityConfig",
+                "aoss:CreateSecurityPolicy",
+                "aoss:TagResource",
+                "aoss:BatchGetVpcEndpoint",
+                "aoss:GetPoliciesStats",
+                "aoss:ListVpcEndpoints",
+                "aoss:UpdateAccountSettings",
+                "aoss:GetAccountSettings",
+                "aoss:GetSecurityConfig",
+                "aoss:BatchGetEffectiveLifecyclePolicy",
+                "aoss:DeleteSecurityConfig",
+                "aoss:ListCollections",
+                "aoss:DeleteAccessPolicy",
+                "aoss:CreateCollection",
+                "aoss:UpdateCollection",
+                "aoss:DeleteCollection"
+            ],
+            "Resource": "*",
+            "Effect": "Allow"
+        },
+        {
+            "Action": [
+                "aoss:APIAccessAll"
+            ],
+            "Resource": "arn:aws:aoss:*:*:collection/*",
+            "Effect": "Allow"
+        },
+        {
+            "Action": [
+                "bedrock:CreateAgent",
+                "bedrock:CreatePrompt",
+                "bedrock:CreatePromptVersion",
+                "bedrock:AssociateAgentKnowledgeBase",
+                "bedrock:CreateAgentActionGroup",
+                "bedrock:CreateAgentAlias",
+                "bedrock:DeleteAgent",
+                "bedrock:DeleteAgentMemory",
+                "bedrock:DeleteAgentActionGroup",
+                "bedrock:DeleteAgentVersion",
+                "bedrock:DeleteAgentAlias",
+                "bedrock:PrepareAgent",
+                "bedrock:DisassociateAgentKnowledgeBase",
+                "bedrock:UpdateAgentAlias",
+                "bedrock:UpdateAgentActionGroup",
+                "bedrock:UpdateAgent",
+                "bedrock:UpdateAgentKnowledgeBase",
+                "bedrock:TagResource",
+                "bedrock:UntagResource",
+                "bedrock:GetAgent",
+                "bedrock:GetAgentKnowledgeBase",
+                "bedrock:GetAgentAlias",
+                "bedrock:GetAgentVersion",
+                "bedrock:GetAgentActionGroup",
+                "bedrock:GetAgentMemory",
+                "bedrock:InvokeInlineAgent",
+                "bedrock:InvokeAgent",
+                "bedrock:ListAgentActionGroups",
+                "bedrock:ListAgentAliases",
+                "bedrock:ListAgentKnowledgeBases",
+                "bedrock:ListAgentVersions",
+                "bedrock:ListAgents",
+                "bedrock:AssociateAgentCollaborator",
+                "bedrock:DisassociateAgentCollaborator",
+                "bedrock:UpdateAgentCollaborator",
+                "bedrock:GetAgentCollaborator",
+                "bedrock:ListAgentCollaborators"
+            ],
+            "Resource": "*",
+            "Effect": "Allow"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ecr:GetAuthorizationToken",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:CompleteLayerUpload",
+                "ecr:DescribeRepositories",
+                "ecr:InitiateLayerUpload",
+                "ecr:CreateRepository",
+                "ecr:ListImages",
+                "ecr:PutImage",
+                "ecr:UploadLayerPart",
+                "ecr:GetRepositoryPolicy",
+                "ecr:SetRepositoryPolicy",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ecr-public:GetAuthorizationToken"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sts:GetServiceBearerToken"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Action": [
+                "lambda:InvokeFunction",
+                "lambda:AddPermission",
+                "lambda:CreateFunction",
+                "lambda:DeleteFunction",
+                "lambda:GetFunction",
+                "lambda:UpdateFunctionConfiguration"
+            ],
+            "Resource": "arn:aws:lambda:<your-aws-region>:<your-aws-account-number>:function:*",
+            "Effect": "Allow"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "iam:PassRole",
+            "Resource": "arn:aws:iam::<your-aws-account-number>:role/*"
+        },
+        {
+            "Action": [
+                "bedrock:CreateModelCustomizationJob",
+                "bedrock:StopModelCustomizationJob",
+                "bedrock:GetModelCustomizationJob",
+                "bedrock:ListModelCustomizationJobs"
+            ],
+            "Resource": "*",
+            "Effect": "Deny"
+        },
+        {
+            "Action": [
+                "bedrock:GetGuardrail",
+                "bedrock:ApplyGuardrail"
+            ],
+            "Resource": "arn:aws:bedrock:*:*:guardrail/*",
+            "Effect": "Allow"
+        },
+        {
+            "Action": [
+                "bedrock:CreateKnowledgeBase",
+                "bedrock:UpdateKnowledgeBase",
+                "bedrock:DeleteKnowledgeBase",
+                "bedrock:GetKnowledgeBase",
+                "bedrock:ListKnowledgeBases",
+                "bedrock:Retrieve",
+                "bedrock:RetrieveAndGenerate",
+                "bedrock:ListDataSources",
+                "bedrock:ListIngestionJobs",
+                "bedrock:GetDataSource",
+                "bedrock:StartIngestionJob",
+                "bedrock:InvokeModel",
+                "bedrock:CreateDataSource",
+                "bedrock:GetIngestionJob",
+                "bedrock:DeleteDataSource"
+            ],
+            "Resource": "*",
+            "Effect": "Allow"
+        },
+        {
+            "Action": [
+                "iam:GetRole",
+                "iam:GetRolePolicy",
+                "iam:PutRolePolicy",
+                "iam:CreateRole",
+                "iam:DeleteRole",
+                "iam:CreatePolicy",
+                "iam:AttachRolePolicy",
+                "iam:CreateServiceLinkedRole",
+                "iam:DeletePolicy",
+                "iam:PassRole",
+                "iam:GetPolicy",
+                "iam:DetachRolePolicy",
+                "iam:DeleteRolePolicy",
+                "iam:ListAttachedRolePolicies"
+            ],
+            "Resource": "*",
+            "Effect": "Allow"
+        },
+        {
+            "Action": [
+                "lambda:AddPermission",
+                "lambda:CreateFunction",
+                "lambda:DeleteFunction",
+                "lambda:GetFunction"
+            ],
+            "Resource": "*",
+            "Effect": "Allow"
+        },
+        {
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:DeleteObject",
+                "s3:ListBucket",
+                "s3:DeleteBucket"
+            ],
+            "Resource": "arn:aws:s3:::*",
+            "Effect": "Allow"
+        },
+        {
+            "Action": [
+                "s3:CreateBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::*",
+                "arn:aws:s3:::*"
+            ],
+            "Effect": "Allow"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:Get*",
+                "s3:List*",
+                "s3:Describe*",
+                "s3-object-lambda:Get*",
+                "s3-object-lambda:List*"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "AmazonBedrockReadOnly",
+            "Effect": "Allow",
+            "Action": [
+                "bedrock:Get*",
+                "bedrock:List*"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "AllowMarketplaceModelsListing",
+            "Effect": "Allow",
+            "Action": [
+                "sagemaker:ListHubContents"
+            ],
+            "Resource": "arn:aws:sagemaker:*:aws:hub/SageMakerPublicHub"
+        }
+    ]
+}
