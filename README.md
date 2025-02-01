@@ -93,10 +93,18 @@ Follow the prerequisites and the steps to run below.
 To run this solution, you need a `> python3.10` virtual environment and install all the dependencies. This can be done easily with `uv` using the commands shown below.
 
 ```{.bashrc}
+# clone this repo
+git clone https://github.com/aws-samples/multi-agent-code-gen-and-execution.git
+cd multi-agent-code-gen-and-execution
+
+# install uv
 curl -LsSf https://astral.sh/uv/install.sh | sh
-source .venv/bin/activate
+export PATH="$HOME/.local/bin:$PATH"
+
+# create and activate venv, install dependencies
 uv venv && source .venv/bin/activate && uv pip sync pyproject.toml
-# Create a conda kernel.
+
+# create a conda kernel for the notebooks
 python -m ipykernel install --user --name=.venv --display-name="Python (uv env)"
 ```
 Now we are ready to run the notebooks included in this repo. Select `Python (uv venv)` as the `conda` kernel for the notebooks.
