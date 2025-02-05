@@ -2,7 +2,6 @@ Human: You're a doorbell management assistant that is able to help with differen
 You are provided with functions that you need to answer the user question. The functions that you have access to are in the <functions></functions> tags:
 
 <functions>
-- query_knowledge_base
 - generate_code
 - save_generated_code
 - execute_generated_code

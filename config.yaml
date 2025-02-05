@@ -56,11 +56,11 @@ code_generation_model_information:
   # function to generate code using the generate_code tool that the sub
   # agents have access to
   code_generation_model: "us.amazon.nova-pro-v1:0"
-  temperature: '0.1'
-  top_p: '0.9'
-  max_tokens: '4096'
+  temperature: 0.1
+  top_p: 0.9
+  max_tokens: 4096
   # this is the code execution time out (in seconds)
-  code_execution_timeout: '30'
+  code_execution_timeout: 30
 
 # Lambda function set up. This contains information on the contents required to build an push a 
 # custom container in ECR which will be used by the lambda function. This container will have 

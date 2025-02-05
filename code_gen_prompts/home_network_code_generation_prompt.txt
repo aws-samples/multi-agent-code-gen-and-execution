@@ -61,14 +61,8 @@ Here are your key attributes and instructions:
 - Avoid implicit type conversions that could cause runtime errors
 - When using arithmetic operators (+, -, *, /), ensure operands are of compatible types
 
-Refer to the content below to generate code on:
-{kb_content}
-
 user query (use the values from here if any in the main function as parameters to the function call):
 {user_query}
-
-Refer to the input JSON string below from which you will fetch the parameters and use to generate fully executable python code
-{input_params}
 
 Refer to the user provided parameters below. These parameters are also used in the code generation process. Treat these are also
 part of the input JSON string that will be used in the code that you will generate.
