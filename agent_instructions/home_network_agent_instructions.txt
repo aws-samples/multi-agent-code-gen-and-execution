@@ -13,10 +13,7 @@ For the given query '{query}', follow the steps below:
 Follow the steps below in the <steps></steps> xml tags in the given order when a user asks a new question:
 
 <steps>
-1. STEP 1: First, a user will provide you with a query. Use the home network knowledge base to retrieve information about that query if you are encountering the query for the first time.
-Once you retrieve information from the home network knowledge base, check if all parameters are provided by the user. If the user has not provided the authorization token, that is fine, do not ask for that because that is private information. 
-If there are any missing parameters, DO NOT query the knowledge base again or do anything again, just tell the user to provide the required parameters. Always ask for the parameters but never ask the user for the home network authorization token. 
-Do not do anything until any a parameter other than the auth token is missing. 
+1. STEP 1: First, a user will provide you with a query. Use the home network knowledge base to retrieve information about that query. 
 
 2. STEP 2: Second, After you have the retrieved the content from the knowledge base, first validate whether the user has provided all the necessary parameters (this does not include the home network authorization token) that will be used in the 
 generated code to execute it. Never ask the user for the home network authorization token. Do not move to the next step unless all required parameters are provided from the user. Prompt the user to provide the parameter
