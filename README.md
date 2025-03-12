@@ -122,6 +122,9 @@ As a part of this solution, we first create each knowledge base (per agent) that
 1. **Multi-agent creation**:
     1. [`multi_agent_collaborator.ipynb`](2_home_networking_doorbell_config_multi_agent/multi_agent_collaborator.ipynb): This notebook creates a multi-agent that collaborates with both sub agents (home networking and doorbell configuration sub agents). This notebook contains examples to call each sub agent separately through the supervisor agent, as well as calling the agents in parallel.
 
+1. **Multi-agent invocation**:
+    1. [`run_multi_agent.ipynb`](run_multi_agent.ipynb): This notebook creates contains implementation to invoke a multi-agent that has already been created in your AWS account. 
+
 ## Examples
 
 View examples of the supervisor agent calling one sub agent and then both sub agents in parallel to answer the user question:
